@@ -1,38 +1,55 @@
 <script>
-	let username = '';
-	let password = '';
-	let error = '';
+	let newUsername = '';
+	let newPassword = '';
+	let confirmPassword = '';
+	let message = '';
+	let messageType = '';
 
-	function login() {
-		error = '';
+	function createUser() {
+		message = '';
+		messageType = '';
 
-		if (username === 'patient' && password === '1234') {
-			localStorage.setItem('role', 'patient');
-			localStorage.setItem('username', username);
-			window.location.href = '/patient';
+		if (!newUsername || !newPassword || !confirmPassword) {
+			message = 'Udfyld alle felter.';
+			messageType = 'error';
 			return;
 		}
 
-		if (username === 'doctor' && password === '1234') {
-			localStorage.setItem('role', 'clinician');
-			localStorage.setItem('username', username);
-			window.location.href = '/clinician';
+		if (newPassword !== confirmPassword) {
+			message = 'De to passwords er ikke ens.';
+			messageType = 'error';
 			return;
 		}
 
 		const users = JSON.parse(localStorage.getItem('users') || '[]');
 
-		const foundUser = users.find(
-			(user) => user.username === username && user.password === password
-		);
+		const userExists = users.some((user) => user.username === newUsername);
 
-		if (foundUser) {
-			localStorage.setItem('role', 'patient');
-			localStorage.setItem('username', foundUser.username);
-			window.location.href = '/patient';
-		} else {
-			error = 'Forkert brugernavn eller password';
+		if (userExists || newUsername === 'patient' || newUsername === 'doctor') {
+			message = 'Brugernavnet findes allerede.';
+			messageType = 'error';
+			return;
 		}
+
+		const newUser = {
+			username: newUsername,
+			password: newPassword,
+			role: 'patient'
+		};
+
+		users.push(newUser);
+		localStorage.setItem('users', JSON.stringify(users));
+
+		message = 'Patientbruger oprettet. Du sendes tilbage til login.';
+		messageType = 'success';
+
+		newUsername = '';
+		newPassword = '';
+		confirmPassword = '';
+
+		setTimeout(() => {
+			window.location.href = '/';
+		}, 1200);
 	}
 </script>
 
@@ -40,27 +57,28 @@
 	<section class="card">
 		<div class="heart">♥</div>
 
-		<h1>HeartLink</h1>
+		<h1>Opret patientbruger</h1>
 		<p class="subtitle">
-			Telemedicinsk prototype til hjemmemonitorering af hjertesvigtpatienter
+			Opret en patientbruger til HeartLink-prototypen
 		</p>
 
 		<div class="form">
 			<label>Brugernavn</label>
-			<input bind:value={username} placeholder="Indtast brugernavn" />
+			<input bind:value={newUsername} placeholder="Fx anna eller patient2" />
 
 			<label>Password</label>
-			<input bind:value={password} type="password" placeholder="Indtast password" />
+			<input bind:value={newPassword} type="password" placeholder="Vælg password" />
 
-			<button onclick={login}>Login</button>
+			<label>Gentag password</label>
+			<input bind:value={confirmPassword} type="password" placeholder="Gentag password" />
+
+			<button onclick={createUser}>Opret patientbruger</button>
 		</div>
 
-		<a class="secondary-button" href="/register">
-			Opret ny patientbruger
-		</a>
+		<a class="secondary-button" href="/">Tilbage til login</a>
 
-		{#if error}
-			<p class="error">{error}</p>
+		{#if message}
+			<p class={messageType}>{message}</p>
 		{/if}
 	</section>
 </main>
@@ -78,7 +96,7 @@
 
 	.card {
 		width: 100%;
-		max-width: 430px;
+		max-width: 460px;
 		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
 		padding: 38px;
@@ -104,7 +122,7 @@
 	}
 
 	h1 {
-		font-size: 38px;
+		font-size: 34px;
 		margin: 0;
 		color: #1e293b;
 	}
@@ -178,6 +196,13 @@
 
 	.error {
 		color: #dc2626;
+		margin-top: 16px;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.success {
+		color: #16a34a;
 		margin-top: 16px;
 		font-weight: bold;
 		text-align: center;

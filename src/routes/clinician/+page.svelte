@@ -50,6 +50,7 @@
 
 	function logout() {
 		localStorage.removeItem('role');
+		localStorage.removeItem('username');
 		window.location.href = '/';
 	}
 </script>
@@ -178,7 +179,7 @@
 	.page {
 		min-height: 100vh;
 		padding: 30px 20px;
-		background: linear-gradient(135deg, #ffe4ef, #dff5ff);
+		background: linear-gradient(135deg, #dbeafe, #ffedd5);
 		font-family: Arial, sans-serif;
 	}
 
@@ -190,9 +191,9 @@
 	.header-card,
 	.legend-card,
 	.card {
-		background: rgba(255, 255, 255, 0.92);
+		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
-		box-shadow: 0 20px 50px rgba(80, 80, 120, 0.14);
+		box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14);
 	}
 
 	.header-card {
@@ -226,34 +227,22 @@
 	}
 
 	.latest-card {
-		border-left: 8px solid #60a5fa;
+		border-left: 8px solid #2563eb;
 	}
 
 	.heart {
 		font-size: 54px;
-		color: #ec5c8a;
+		color: #f97316;
 		animation: heartbeat 1.2s infinite;
 	}
 
 	@keyframes heartbeat {
-		0% {
-			transform: scale(1);
-		}
-		15% {
-			transform: scale(1.18);
-		}
-		30% {
-			transform: scale(1);
-		}
-		45% {
-			transform: scale(1.12);
-		}
-		60% {
-			transform: scale(1);
-		}
-		100% {
-			transform: scale(1);
-		}
+		0% { transform: scale(1); }
+		15% { transform: scale(1.18); }
+		30% { transform: scale(1); }
+		45% { transform: scale(1.12); }
+		60% { transform: scale(1); }
+		100% { transform: scale(1); }
 	}
 
 	h1 {
@@ -340,7 +329,7 @@
 
 	.info-pill {
 		background: #f8fbff;
-		border: 1px solid #e2e8f0;
+		border: 1px solid #dbeafe;
 		border-radius: 18px;
 		padding: 16px;
 	}
@@ -358,10 +347,10 @@
 	}
 
 	.message-box {
-		background: #fff7fb;
+		background: #fff7ed;
 		border-radius: 20px;
 		padding: 20px;
-		border: 1px solid #f5d0e0;
+		border: 1px solid #fed7aa;
 		color: #334155;
 		line-height: 1.6;
 	}
@@ -402,7 +391,7 @@
 		padding: 14px;
 		border: none;
 		border-radius: 18px;
-		background: linear-gradient(135deg, #ec5c8a, #60a5fa);
+		background: linear-gradient(135deg, #2563eb, #f97316);
 		color: white;
 		font-weight: bold;
 		font-size: 16px;

@@ -56,7 +56,7 @@
 		}
 
 		const measurement = {
-			patientName: 'Demo Patient',
+			patientName: localStorage.getItem('username') || 'Demo Patient',
 			date: new Date().toLocaleString('da-DK'),
 			weight,
 			previousWeight,
@@ -84,6 +84,7 @@
 
 	function logout() {
 		localStorage.removeItem('role');
+		localStorage.removeItem('username');
 		window.location.href = '/';
 	}
 </script>
@@ -162,16 +163,16 @@
 						<div class="status-circle neutral"></div>
 						<p class="status-title">Ingen status endnu</p>
 						<p class="status-message">
-							Udfyld målingerne og tryk på knappen for at beregne din status.
+							Udfyld målingerne og tryk på knappen for at beregne patientens status.
 						</p>
 					</div>
 				{/if}
 
 				<div class="info-box">
-					<h3>Formål</h3>
+					<h3>Prototype-logik</h3>
 					<p>
-						Systemet hjælper med tidlig opsporing af forværring ved hjertesvigt ved at
-						følge vægt, puls, blodtryk, åndenød, hævede ben og medicinstatus.
+						Systemet vurderer patientens tilstand ud fra vægtstigning, puls, blodtryk,
+						åndenød, hævede ben og medicinstatus.
 					</p>
 				</div>
 
@@ -185,7 +186,7 @@
 	.page {
 		min-height: 100vh;
 		padding: 30px 20px;
-		background: linear-gradient(135deg, #ffe4ef, #dff5ff);
+		background: linear-gradient(135deg, #dbeafe, #ffedd5);
 		font-family: Arial, sans-serif;
 	}
 
@@ -195,10 +196,10 @@
 	}
 
 	.header-card {
-		background: rgba(255, 255, 255, 0.9);
+		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
 		padding: 28px;
-		box-shadow: 0 20px 50px rgba(80, 80, 120, 0.14);
+		box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14);
 		display: flex;
 		align-items: center;
 		gap: 18px;
@@ -207,7 +208,7 @@
 
 	.heart {
 		font-size: 54px;
-		color: #ec5c8a;
+		color: #f97316;
 		animation: heartbeat 1.2s infinite;
 	}
 
@@ -239,10 +240,10 @@
 	}
 
 	.card {
-		background: rgba(255, 255, 255, 0.92);
+		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
 		padding: 30px;
-		box-shadow: 0 20px 50px rgba(80, 80, 120, 0.14);
+		box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14);
 	}
 
 	h2 {
@@ -269,15 +270,15 @@
 		border: 1px solid #cbd5e1;
 		margin-bottom: 18px;
 		font-size: 16px;
-		background: #f7fbff;
+		background: #f8fbff;
 	}
 
 	input:focus,
 	select:focus,
 	textarea:focus {
 		outline: none;
-		border-color: #ec5c8a;
-		box-shadow: 0 0 0 3px rgba(236, 92, 138, 0.18);
+		border-color: #2563eb;
+		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 	}
 
 	button {
@@ -288,7 +289,7 @@
 		padding: 14px;
 		border: none;
 		border-radius: 18px;
-		background: linear-gradient(135deg, #ec5c8a, #60a5fa);
+		background: linear-gradient(135deg, #2563eb, #f97316);
 		color: white;
 		font-weight: bold;
 		font-size: 16px;
@@ -307,7 +308,7 @@
 		padding: 28px;
 		text-align: center;
 		margin-bottom: 22px;
-		border: 1px solid #e2e8f0;
+		border: 1px solid #dbeafe;
 	}
 
 	.status-circle {
@@ -318,10 +319,21 @@
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 	}
 
-	.status-circle.green { background: #22c55e; }
-	.status-circle.yellow { background: #facc15; }
-	.status-circle.red { background: #ef4444; }
-	.status-circle.neutral { background: #cbd5e1; }
+	.status-circle.green {
+		background: #22c55e;
+	}
+
+	.status-circle.yellow {
+		background: #facc15;
+	}
+
+	.status-circle.red {
+		background: #ef4444;
+	}
+
+	.status-circle.neutral {
+		background: #cbd5e1;
+	}
 
 	.status-title {
 		font-size: 22px;
@@ -343,11 +355,11 @@
 	}
 
 	.info-box {
-		background: #fff7fb;
+		background: #fff7ed;
 		border-radius: 20px;
 		padding: 20px;
 		margin-bottom: 18px;
-		border: 1px solid #f5d0e0;
+		border: 1px solid #fed7aa;
 	}
 
 	.info-box h3 {
