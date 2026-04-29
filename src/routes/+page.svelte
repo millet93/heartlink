@@ -3,16 +3,83 @@
 	let password = '';
 	let error = '';
 
+	let showCreateUser = false;
+	let newUsername = '';
+	let newPassword = '';
+	let newRole = 'patient';
+	let createMessage = '';
+
 	function login() {
+		error = '';
+
+		// Standard demo-logins
 		if (username === 'patient' && password === '1234') {
 			localStorage.setItem('role', 'patient');
+			localStorage.setItem('username', username);
 			window.location.href = '/patient';
-		} else if (username === 'doctor' && password === '1234') {
+			return;
+		}
+
+		if (username === 'doctor' && password === '1234') {
 			localStorage.setItem('role', 'clinician');
+			localStorage.setItem('username', username);
 			window.location.href = '/clinician';
+			return;
+		}
+
+		// Brugeroprettede logins
+		const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+		const foundUser = users.find(
+			(user) => user.username === username && user.password === password
+		);
+
+		if (foundUser) {
+			localStorage.setItem('role', foundUser.role);
+			localStorage.setItem('username', foundUser.username);
+
+			if (foundUser.role === 'patient') {
+				window.location.href = '/patient';
+			} else {
+				window.location.href = '/clinician';
+			}
 		} else {
 			error = 'Forkert brugernavn eller password';
 		}
+	}
+
+	function createUser() {
+		createMessage = '';
+		error = '';
+
+		if (!newUsername || !newPassword) {
+			createMessage = 'Udfyld både brugernavn og password.';
+			return;
+		}
+
+		const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+		const userExists = users.some((user) => user.username === newUsername);
+
+		if (userExists || newUsername === 'patient' || newUsername === 'doctor') {
+			createMessage = 'Brugernavnet findes allerede.';
+			return;
+		}
+
+		const newUser = {
+			username: newUsername,
+			password: newPassword,
+			role: newRole
+		};
+
+		users.push(newUser);
+		localStorage.setItem('users', JSON.stringify(users));
+
+		createMessage = 'Bruger oprettet. Du kan nu logge ind.';
+		newUsername = '';
+		newPassword = '';
+		newRole = 'patient';
+		showCreateUser = false;
 	}
 </script>
 
@@ -25,18 +92,52 @@
 			Telemedicinsk prototype til hjemmemonitorering af hjertesvigtpatienter
 		</p>
 
-		<div class="form">
-			<label>Brugernavn</label>
-			<input bind:value={username} placeholder="Indtast brugernavn" />
+		{#if !showCreateUser}
+			<div class="form">
+				<label>Brugernavn</label>
+				<input bind:value={username} placeholder="Indtast brugernavn" />
 
-			<label>Password</label>
-			<input bind:value={password} type="password" placeholder="Indtast password" />
+				<label>Password</label>
+				<input bind:value={password} type="password" placeholder="Indtast password" />
 
-			<button onclick={login}>Login</button>
-		</div>
+				<button onclick={login}>Login</button>
+			</div>
 
-		{#if error}
-			<p class="error">{error}</p>
+			<button class="secondary-button" onclick={() => (showCreateUser = true)}>
+				Opret ny bruger
+			</button>
+
+			{#if error}
+				<p class="error">{error}</p>
+			{/if}
+
+			{#if createMessage}
+				<p class="success">{createMessage}</p>
+			{/if}
+		{:else}
+			<div class="form">
+				<label>Nyt brugernavn</label>
+				<input bind:value={newUsername} placeholder="Fx anna eller kliniker1" />
+
+				<label>Nyt password</label>
+				<input bind:value={newPassword} type="password" placeholder="Vælg password" />
+
+				<label>Brugertype</label>
+				<select bind:value={newRole}>
+					<option value="patient">Patient</option>
+					<option value="clinician">Kliniker</option>
+				</select>
+
+				<button onclick={createUser}>Opret bruger</button>
+			</div>
+
+			<button class="secondary-button" onclick={() => (showCreateUser = false)}>
+				Tilbage til login
+			</button>
+
+			{#if createMessage}
+				<p class="error">{createMessage}</p>
+			{/if}
 		{/if}
 	</section>
 </main>
@@ -114,7 +215,8 @@
 		color: #334155;
 	}
 
-	input {
+	input,
+	select {
 		width: 100%;
 		box-sizing: border-box;
 		padding: 13px;
@@ -125,7 +227,8 @@
 		background: #f7fbff;
 	}
 
-	input:focus {
+	input:focus,
+	select:focus {
 		outline: none;
 		border-color: #ec5c8a;
 		box-shadow: 0 0 0 3px rgba(236, 92, 138, 0.2);
@@ -148,11 +251,24 @@
 		opacity: 0.9;
 	}
 
+	.secondary-button {
+		background: white;
+		color: #334155;
+		border: 1px solid #cbd5e1;
+		margin-top: 14px;
+	}
+
 	.error {
 		color: #dc2626;
 		margin-top: 16px;
 		font-weight: bold;
 		text-align: center;
 	}
+
+	.success {
+		color: #16a34a;
+		margin-top: 16px;
+		font-weight: bold;
+		text-align: center;
+	}
 </style>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
