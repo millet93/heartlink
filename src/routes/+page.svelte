@@ -72,7 +72,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: 24px;
-		background: linear-gradient(135deg, #dbeafe, #ffedd5);
+		background: linear-gradient(135deg, #ffe4ef, #dff5ff);
 		font-family: Arial, sans-serif;
 	}
 
@@ -82,14 +82,14 @@
 		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
 		padding: 38px;
-		box-shadow: 0 20px 50px rgba(37, 99, 235, 0.16);
+		box-shadow: 0 20px 50px rgba(80, 80, 120, 0.18);
 		text-align: center;
 		border: 1px solid rgba(255, 255, 255, 0.85);
 	}
 
 	.heart {
 		font-size: 72px;
-		color: #f97316;
+		color: #ec5c8a;
 		animation: heartbeat 1.2s infinite;
 		margin-bottom: 10px;
 	}
@@ -139,8 +139,8 @@
 
 	input:focus {
 		outline: none;
-		border-color: #2563eb;
-		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+		border-color: #ec5c8a;
+		box-shadow: 0 0 0 3px rgba(236, 92, 138, 0.2);
 	}
 
 	button,
@@ -160,7 +160,7 @@
 	}
 
 	button {
-		background: linear-gradient(135deg, #2563eb, #f97316);
+		background: linear-gradient(135deg, #ec5c8a, #60a5fa);
 		color: white;
 	}
 

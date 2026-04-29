@@ -186,7 +186,7 @@
 	.page {
 		min-height: 100vh;
 		padding: 30px 20px;
-		background: linear-gradient(135deg, #dbeafe, #ffedd5);
+		background: linear-gradient(135deg, #ffe4ef, #dff5ff);
 		font-family: Arial, sans-serif;
 	}
 
@@ -199,7 +199,7 @@
 		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
 		padding: 28px;
-		box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14);
+		box-shadow: 0 20px 50px rgba(80, 80, 120, 0.14);
 		display: flex;
 		align-items: center;
 		gap: 18px;
@@ -208,7 +208,7 @@
 
 	.heart {
 		font-size: 54px;
-		color: #f97316;
+		color: #ec5c8a;
 		animation: heartbeat 1.2s infinite;
 	}
 
@@ -243,7 +243,7 @@
 		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
 		padding: 30px;
-		box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14);
+		box-shadow: 0 20px 50px rgba(80, 80, 120, 0.14);
 	}
 
 	h2 {
@@ -277,8 +277,8 @@
 	select:focus,
 	textarea:focus {
 		outline: none;
-		border-color: #2563eb;
-		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+		border-color: #ec5c8a;
+		box-shadow: 0 0 0 3px rgba(236, 92, 138, 0.18);
 	}
 
 	button {
@@ -289,7 +289,7 @@
 		padding: 14px;
 		border: none;
 		border-radius: 18px;
-		background: linear-gradient(135deg, #2563eb, #f97316);
+		background: linear-gradient(135deg, #ec5c8a, #60a5fa);
 		color: white;
 		font-weight: bold;
 		font-size: 16px;
@@ -308,7 +308,7 @@
 		padding: 28px;
 		text-align: center;
 		margin-bottom: 22px;
-		border: 1px solid #dbeafe;
+		border: 1px solid #e2e8f0;
 	}
 
 	.status-circle {
@@ -355,11 +355,11 @@
 	}
 
 	.info-box {
-		background: #fff7ed;
+		background: #fff7fb;
 		border-radius: 20px;
 		padding: 20px;
 		margin-bottom: 18px;
-		border: 1px solid #fed7aa;
+		border: 1px solid #f5d0e0;
 	}
 
 	.info-box h3 {

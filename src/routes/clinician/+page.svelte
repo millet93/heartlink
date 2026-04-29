@@ -179,7 +179,7 @@
 	.page {
 		min-height: 100vh;
 		padding: 30px 20px;
-		background: linear-gradient(135deg, #dbeafe, #ffedd5);
+		background: linear-gradient(135deg, #ffe4ef, #dff5ff);
 		font-family: Arial, sans-serif;
 	}
 
@@ -193,7 +193,7 @@
 	.card {
 		background: rgba(255, 255, 255, 0.94);
 		border-radius: 28px;
-		box-shadow: 0 20px 50px rgba(37, 99, 235, 0.14);
+		box-shadow: 0 20px 50px rgba(80, 80, 120, 0.14);
 	}
 
 	.header-card {
@@ -227,12 +227,12 @@
 	}
 
 	.latest-card {
-		border-left: 8px solid #2563eb;
+		border-left: 8px solid #60a5fa;
 	}
 
 	.heart {
 		font-size: 54px;
-		color: #f97316;
+		color: #ec5c8a;
 		animation: heartbeat 1.2s infinite;
 	}
 
@@ -329,7 +329,7 @@
 
 	.info-pill {
 		background: #f8fbff;
-		border: 1px solid #dbeafe;
+		border: 1px solid #e2e8f0;
 		border-radius: 18px;
 		padding: 16px;
 	}
@@ -347,10 +347,10 @@
 	}
 
 	.message-box {
-		background: #fff7ed;
+		background: #fff7fb;
 		border-radius: 20px;
 		padding: 20px;
-		border: 1px solid #fed7aa;
+		border: 1px solid #f5d0e0;
 		color: #334155;
 		line-height: 1.6;
 	}
@@ -391,7 +391,7 @@
 		padding: 14px;
 		border: none;
 		border-radius: 18px;
-		background: linear-gradient(135deg, #2563eb, #f97316);
+		background: linear-gradient(135deg, #ec5c8a, #60a5fa);
 		color: white;
 		font-weight: bold;
 		font-size: 16px;
